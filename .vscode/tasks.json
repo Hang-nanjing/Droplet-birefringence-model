@@ -1,0 +1,55 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "CMake: Configure",
+      "type": "shell",
+      "command": "cmake",
+      "args": [
+        "-S",
+        ".",
+        "-B",
+        "build"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "CMake: Build",
+      "type": "shell",
+      "command": "cmake",
+      "args": [
+        "--build",
+        "build"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": "$msCompile",
+      "dependsOn": "CMake: Configure"
+    },
+    {
+      "label": "Run: bos_ray_trace",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "$candidates = @('.\\build\\Debug\\bos_ray_trace.exe', '.\\build\\Release\\bos_ray_trace.exe', '.\\build\\bos_ray_trace.exe'); $exe = $candidates | Where-Object { Test-Path $_ } | Select-Object -First 1; if (-not $exe) { throw 'bos_ray_trace.exe not found under build/. Please check the CMake build output.' }; & $exe"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "dependsOn": "CMake: Build"
+    }
+  ]
+}

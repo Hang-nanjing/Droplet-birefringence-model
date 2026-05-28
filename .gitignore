@@ -1,0 +1,25 @@
+# Build output
+build/
+out/
+
+# Visual Studio / VS Code local state
+.vs/
+*.suo
+*.user
+*.VC.db
+*.opendb
+*.ipch
+
+# Compiled binaries and debug files
+*.exe
+*.dll
+*.lib
+*.obj
+*.pdb
+*.ilk
+
+# Generated ray-tracing outputs
+displacement_table.csv
+*_trace.svg
+ray_trace_comparison.svg
+ray_trace_preview.svg
